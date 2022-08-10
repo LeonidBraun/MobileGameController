@@ -22,4 +22,4 @@ python3 socket_server.py
 
 Make sure that your phone is in the same local network as the server. Make sure your firewall is not blocking anything.
 
-Enter 'https://<IP>:4443' into your browser.
+Enter 'https://ServerIP:4443' into your browser.
