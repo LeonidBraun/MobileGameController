@@ -24,35 +24,8 @@ class MyServer(BaseHTTPRequestHandler):
                 else:
                     self.wfile.write(bytes(line, "utf-8"))
             f.close()
-        elif self.path[:2] == "/X":
-            self.send_response(200)
-            print(self.path[2:], str(self.path[2:]))
-        elif self.path == "/assets/css/bootstrap.min.css":
-            self.send_response(200)
-            self.send_header("Content-type", "css")
-            self.end_headers()
-            f = open("bootstrap.min.css", "r")
-            for line in f:
-                self.wfile.write(bytes(line, "utf-8"))
-            f.close()
-        elif self.path == "/ball":
-            self.send_response(200)
-            self.send_header("Content-type", "html")
-            self.end_headers()
-            f = open("ball.html", "r")
-            for line in f:
-                self.wfile.write(bytes(line, "utf-8"))
-            f.close()
-        # elif self.path == "/favicon.ico":
-        #     self.send_response(200)
-        #     self.send_header("Content-type", "html")
-        #     self.end_headers()
-        #     f = open("ball.html","r")
-        #     for line in f:
-        #         self.wfile.write(bytes(line, "utf-8"))
-        #     f.close()
         else:
-            self.send_response(200)
+            self.send_response(404)
             # self.send_header("Content-type", "html")
             self.end_headers()
 
