@@ -71,7 +71,7 @@ def toVJoy(message: str,local_id,controllers):
 
     x = min(1,max(0,sum_X/sum))
     y = min(1,max(0,sum_Y/sum))
-    z = (sum_beta / (2 * np.pi)) + 0.5
+    z = (sum_beta/sum / (2 * np.pi)) + 0.5
     z = min(1,max(0,z))
 
     j.data.wAxisX = int(x * 0x8000)

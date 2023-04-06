@@ -48,6 +48,16 @@
         var gamma = 0.0;
         //var lastUpdate = Date.now();
         var ws = new WebSocket(port);
+        try{
+            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission().then(permissionState => {
+                    if (permissionState === 'granted') {
+                    window.addEventListener('deviceorientation', onOrientationChange);
+                    };
+                }).catch(console.error);
+            }
+        }catch(e){
+        }
         window.addEventListener("deviceorientation", onOrientationChange);
         document.getElementById("touchzone").addEventListener("touchmove", onTouchMove);
         document.getElementById("touchzone").addEventListener("touchstart", onTouchMove);
