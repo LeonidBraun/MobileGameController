@@ -62,9 +62,13 @@
         document.getElementById("touchzone").addEventListener("touchmove", onTouchMove);
         document.getElementById("touchzone").addEventListener("touchstart", onTouchMove);
         document.getElementById("touchzone").addEventListener("touchend", onTouchEnd);
+        document.getElementById("text").innerHTML = "touch fleura " + window.location.hash;
+        
+        ws.onopen = () => {ws.send("PLAYER:"+window.location.hash[1]);};
+
         function sendmsg() {
             if (ws.readyState == ws.OPEN && ws.bufferedAmount == 0) {
-                ws.send(x + '_' + y + '_' + alpha + '_' + beta + '_' + gamma);
+                ws.send(x + ':' + y + ':' + alpha + ':' + beta + ':' + gamma);
                 //lastUpdate = Date.now();;
             }
         }
@@ -72,7 +76,6 @@
             e.preventDefault();
             var width = document.getElementById("touchzone").clientWidth;
             var height = document.getElementById("touchzone").clientHeight;
-            document.getElementById("text").innerHTML = "";
             for (var i = 0; i < e.changedTouches.length; i++) {
                 var touch = e.changedTouches[i];
                 if ((touch.clientY - 50.0) < height / 2) {
@@ -84,7 +87,6 @@
                     y = Math.round(1000 * Math.max(0, y)) / 1000;
                     document.getElementById("rightbar").style.left = (y * width + 50) + "px";
                 }
-                document.getElementById("text").innerHTML += "touch fleura1 " + x + " , " + y + "<br>";
             }
             sendmsg()
         }
@@ -92,7 +94,6 @@
             e.preventDefault();
             var width = document.getElementById("touchzone").clientWidth;
             var height = document.getElementById("touchzone").clientHeight;
-            document.getElementById("text").innerHTML = "";
             for (var i = 0; i < e.changedTouches.length; i++) {
                 var touch = e.changedTouches[i];
                 if ((touch.clientY - 50.0) < height / 2) {
@@ -102,7 +103,6 @@
                     y = 1.0;
                     document.getElementById("rightbar").style.left = (y * width + 50) + "px";
                 }
-                document.getElementById("text").innerHTML += "touch fleura1 " + x + " , " + y + "<br>";
             }
             let now = Date.now();
             sendmsg()

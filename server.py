@@ -13,21 +13,21 @@ print(IPAddr, serverPort)
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/":
-            self.send_response(200)
-            self.send_header("Content-type", "html")
-            self.end_headers()
-            f = open("index.html", "r")
-            for line in f:
-                if line.find("const IP = 'XXX.XXX.XXX.XX';") >= 0:
-                    self.wfile.write(bytes(f"const IP = '{IPAddr}';", "utf-8"))
-                else:
-                    self.wfile.write(bytes(line, "utf-8"))
-            f.close()
-        else:
-            self.send_response(404)
-            # self.send_header("Content-type", "html")
-            self.end_headers()
+        # if self.path == "/":
+        self.send_response(200)
+        self.send_header("Content-type", "html")
+        self.end_headers()
+        f = open("index.html", "r")
+        for line in f:
+            if line.find("const IP = 'XXX.XXX.XXX.XX';") >= 0:
+                self.wfile.write(bytes(f"const IP = '{IPAddr}';", "utf-8"))
+            else:
+                self.wfile.write(bytes(line, "utf-8"))
+        f.close()
+        # else:
+        #     self.send_response(404)
+        #     # self.send_header("Content-type", "html")
+        #     self.end_headers()
 
 
 if __name__ == "__main__":

@@ -3,6 +3,10 @@
 ## Prerequisites 
 you need to install the vjoy-driver and openssl (comes with git).
 
+## Multiplayer
+
+start Configure VJoy and add the first 4 devices
+
 ## how to run:
 
 ### Create certificate(on Windows):
