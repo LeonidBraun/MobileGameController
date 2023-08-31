@@ -121,7 +121,9 @@ async def main():
     async with websockets.serve(lambda ws: reply(ws, user_data=user_data), hostName, serverPort, ssl=ssl_context):
         await asyncio.Future()  # run forever
 
-
-if __name__ == "__main__":
+def serve():
     print("start")
     asyncio.run(main())
+
+if __name__ == "__main__":
+    serve()

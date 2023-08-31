@@ -13,7 +13,6 @@ print(IPAddr, serverPort)
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        # if self.path == "/":
         self.send_response(200)
         self.send_header("Content-type", "html")
         self.end_headers()
@@ -29,9 +28,7 @@ class MyServer(BaseHTTPRequestHandler):
         #     # self.send_header("Content-type", "html")
         #     self.end_headers()
 
-
-if __name__ == "__main__":
-
+def serve():
     # & "C:\Program Files\Git\usr\bin\openssl.exe" req -new -x509 -keyout key.pem -out server.pem -days 365 -nodes
     # & "C:\Program Files\Git\usr\bin\openssl.exe" req -new -x509 -days 365 -nodes -out cert.pem -keyout cert.pem
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
@@ -50,3 +47,7 @@ if __name__ == "__main__":
 
     webServer.server_close()
     print("Server stopped.")
+
+if __name__ == "__main__":
+
+    serve()

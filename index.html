@@ -30,6 +30,47 @@
             bottom: 50px;
             background-color: green;
         }
+
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
     </style>
 </head>
 
@@ -38,6 +79,17 @@
     <div id="rightbar"></div>
     <div id="touchzone"></div>
     <p id="text">fleura</p>
+    <div class="dropdown">
+        <button class="dropbtn">chose player</button>
+        <div class="dropdown-content">
+            <a href="#1">Player 1</a>
+            <a href="#2">Player 2</a>
+            <a href="#3">Player 3</a>
+            <a href="#4">Player 4</a>
+        </div>
+    </div>
+
+    </code>
     <script>
         const IP = 'XXX.XXX.XXX.XX';
         const port = 'wss://' + IP + ':8082/';
@@ -48,23 +100,23 @@
         var gamma = 0.0;
         //var lastUpdate = Date.now();
         var ws = new WebSocket(port);
-        try{
+        try {
             if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
                 DeviceOrientationEvent.requestPermission().then(permissionState => {
                     if (permissionState === 'granted') {
-                    window.addEventListener('deviceorientation', onOrientationChange);
+                        window.addEventListener('deviceorientation', onOrientationChange);
                     };
                 }).catch(console.error);
             }
-        }catch(e){
+        } catch (e) {
         }
         window.addEventListener("deviceorientation", onOrientationChange);
         document.getElementById("touchzone").addEventListener("touchmove", onTouchMove);
         document.getElementById("touchzone").addEventListener("touchstart", onTouchMove);
         document.getElementById("touchzone").addEventListener("touchend", onTouchEnd);
         document.getElementById("text").innerHTML = "touch fleura " + window.location.hash;
-        
-        ws.onopen = () => {ws.send("PLAYER:"+window.location.hash[1]);};
+
+        ws.onopen = () => { ws.send("PLAYER:" + window.location.hash[1]); };
 
         function sendmsg() {
             if (ws.readyState == ws.OPEN && ws.bufferedAmount == 0) {
